@@ -1,0 +1,36 @@
+extends ../shared/template
+block content
+  .row
+      h2(style='text-align: center') Dew List
+      .row
+        .col-xs-2
+        .col-xs-8
+          table.table-hover
+            thead
+              tr
+                td.name Name
+                td.date Due
+                td.priority Priority
+                td.done Done?
+                td.category Category
+                td.date Created
+                td.button
+            tbody
+              each task in viewTasks
+                tr(style='background-color: '+task.priority.color)
+                  td.name= task.name
+                  td.date= task.due
+                  td.priority= task.priority.name
+                  td.done
+                    if (task.isComplete)
+                      i.fa.fa-check-circle-o.fa-2x
+                    else
+                      i.fa.fa-circle-o.fa-2x
+                  td.category= task.category
+                  td.date= task.createdAt
+                  td.button
+                    form.form(action='/tasks/'+task.id+'/delete' method='post')
+                      button.btn.btn-primary(type='submit') delete
+            tfoot
+              tr
+                td

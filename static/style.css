@@ -1,0 +1,12 @@
+body {font-family: sans-serif;}
+td.name {width: 200px;}
+td.done {width: 40px;}
+td.date {width: 80px;}
+td.priority {width: 72px;}
+td.category {width: 100px;}
+td.button {width: 40px;}
+tr.name {width: 200px;}
+tr.done {width: 48px;}
+tr.date {width: 120px;}
+tr.priority {width: 72px;}
+tr.category {width: 100px;}

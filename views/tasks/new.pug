@@ -1,0 +1,37 @@
+extends ../shared/template
+block content
+  .row
+      h2(style='text-align: center') Compose a Task
+      form.form(action='/tasks' method='post')
+        .row
+          .col-xs-4
+          .col-xs-4
+            .form-group
+              label(for='inputName') Name
+              input#exampleInputName2.form-control(type='text', placeholder='Jane Doe' name='name')
+        .row
+          .col-xs-4
+          .col-xs-4
+            .form-group
+              label(for='inputDueDate') Due Date
+              input#exampleInputEmail2.form-control(type='date', placeholder='02/03/1959' name='due')
+        .row
+          .col-xs-4
+          .col-xs-3
+            .form-group
+              label(for='inputPriority') Priority
+              select#inputPriority.form-control(type='text', placeholder='Jane Doe' name='priority')
+                each priority in priorities
+                  option(value= priority.value style=`color: ${priority.color};`)= priority.name
+        .row
+          .col-xs-4
+          .col-xs-4
+            .form-group
+              label(for='inputCategory') Category
+              select#exampleInputName2.form-control(type='text', placeholder='Jane Doe' name='category')
+                each category in categories
+                  option(value= category.name)= category.name
+        .row
+          .col-xs-4
+          .col-xs-4
+            button.btn.btn-primary(type='submit') Save Task
