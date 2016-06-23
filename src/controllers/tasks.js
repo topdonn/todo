@@ -1,4 +1,4 @@
-/* eslint-disable new-cap func-names*/
+/* eslint-disable new-cap, func-names, array-callback-return*/
 
 import Category from '../models/category';
 import Priority from '../models/priority';
@@ -25,7 +25,6 @@ router.get('/new', (req, res) => {
 // create task
 router.post('/', (req, res) => {
   const task = new Task(req.body);
-  console.log('FUCK THE MONGOLIANS');
   task.save(err => {
     if (!err) {
       res.redirect('/tasks');
@@ -37,14 +36,22 @@ router.post('/', (req, res) => {
 
 // flips completion
 router.post('/:id/complete', (req, res) => {
-  res.redirect('/tasks');
+  const id = req.params.id;
+  let completed1 = true;
+  Task.find({ _id: id }, (err, task) => {
+    const taskToBeUpdated = new Task(task[0]);
+    if (taskToBeUpdated.isComplete) {
+      completed1 = false;
+    }
+    Task.findOneAndUpdate({ _id: id }, { isComplete: completed1 }, () => {
+      res.redirect('/tasks');
+    });
+  });
 });
 
 // delete task
 router.post('/:id/delete', (req, res) => {
-  console.log('FUCK THE DUCKS');
-  Task.findByIdAndRemove({ _id:req.params.id }, (err => {
-    console.log('outstuff;',req.params.id);
+  Task.findByIdAndRemove({ _id: req.params.id }, (() => {
     res.redirect('/tasks');
   }));
 });
